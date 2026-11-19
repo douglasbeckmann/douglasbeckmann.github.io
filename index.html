@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Douglas Beckmann | Desenvolvedor .NET e sistemas sob medida</title>
+<meta name="description" content="Douglas Beckmann, desenvolvedor .NET e sócio do IMGestor. Sistemas web sob medida, notas fiscais, boletos, Pix e integrações para empresas. Vale do Taquari/RS, atendimento em todo o Brasil.">
+<meta property="og:title" content="Douglas Beckmann | Desenvolvedor .NET">
+<meta property="og:description" content="Sistemas web sob medida, NF-e, boletos, Pix e integrações. Sócio do IMGestor.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#06080d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2360a5fa'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='26' fill='%2306080d' text-anchor='middle'%3EDB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06080d; --ink:#eef2f8; --muted:#8b97a9; --dim:#5d687a;
+  --card:rgba(255,255,255,.035); --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.16);
+  --blue:#60a5fa; --violet:#a78bfa; --cyan:#22d3ee; --green:#34d399;
+  --grad:linear-gradient(120deg,#60a5fa 0%,#a78bfa 50%,#22d3ee 100%);
+  --r:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:"Inter Tight",system-ui,Segoe UI,Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--bg)}
+a{color:inherit}
+.bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bgfx::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%)}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;animation:float 18s ease-in-out infinite}
+.o1{width:520px;height:520px;background:#2563eb;top:-180px;left:-120px}
+.o2{width:460px;height:460px;background:#7c3aed;top:-120px;right:-140px;animation-delay:-6s}
+.o3{width:380px;height:380px;background:#0891b2;top:55%;left:40%;opacity:.22;animation-delay:-12s}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+
+.wrap{max-width:1200px;margin:0 auto;padding:18px 16px 48px}
+.nav{position:sticky;top:14px;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px 14px;margin-bottom:22px;border:1px solid var(--line);border-radius:999px;background:rgba(10,13,20,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;letter-spacing:-.01em}
+.logo b{width:30px;height:30px;border-radius:9px;background:var(--grad);color:#06080d;display:grid;place-items:center;font-size:12px}
+.menu{display:flex;gap:2px}
+.menu a{font-size:14px;text-decoration:none;color:var(--muted);padding:8px 14px;border-radius:999px;transition:color .2s,background .2s}
+.menu a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.cta{font-size:14px;font-weight:600;text-decoration:none;padding:9px 16px;border-radius:999px;background:var(--ink);color:#06080d}
+.cta:hover{background:#fff}
+
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.card{position:relative;border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:26px;overflow:hidden;isolation:isolate;transition:border-color .3s,transform .3s}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(420px circle at var(--x,50%) var(--y,0%),rgba(120,150,255,.14),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover{border-color:var(--line2)}
+.card:hover::before{opacity:1}
+.k{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin:0 0 12px}
+h1{font-size:clamp(38px,6vw,78px);line-height:.98;letter-spacing:-.045em;margin:0 0 22px;font-weight:800}
+h2{font-size:clamp(26px,3.2vw,40px);line-height:1.05;letter-spacing:-.03em;margin:0;font-weight:700}
+h3{font-size:18px;letter-spacing:-.01em;margin:0 0 6px;font-weight:600}
+p{margin:0}
+.muted{color:var(--muted)}
+.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+
+.hero{padding:40px 36px;min-height:470px;display:flex;flex-direction:column;justify-content:space-between}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:#cdd6e4;padding:7px 14px 7px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);width:max-content;margin-bottom:26px}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.lead{font-size:18px;color:var(--muted);max-width:640px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;font-size:15px;padding:13px 20px;border-radius:14px;border:1px solid var(--line);transition:transform .2s,background .2s,border-color .2s}
+.btn:hover{transform:translateY(-1px);border-color:var(--line2);background:rgba(255,255,255,.05)}
+.btn.wa{background:var(--green);border-color:var(--green);color:#03140c}
+.btn.wa:hover{background:#4be3ab}
+.btn svg{width:18px;height:18px}
+
+.photo{padding:0;min-height:470px;background:linear-gradient(160deg,#141a28,#0b0f18)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;z-index:-1}
+.photo::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 55%,rgba(6,8,13,.75))}
+.photo .ph{position:absolute;inset:0;z-index:-1;display:grid;place-items:center;font-size:120px;font-weight:800;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.12)}
+.photo .tag{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(8,11,18,.65);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:13px}
+.photo .tag b{display:block;font-size:14px}
+.photo .loc{color:var(--muted)}
+
+.stat .num{font-size:64px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.stat .num span{font-size:34px;color:var(--muted)}
+
+.code{font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.75;background:rgba(0,0,0,.35);padding:0}
+.code .bar{display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:12px;color:var(--dim)}
+.code .bar i{width:10px;height:10px;border-radius:50%;background:#2a3140;display:inline-block}
+.code .bar i:nth-child(1){background:#ff5f57}.code .bar i:nth-child(2){background:#febc2e}.code .bar i:nth-child(3){background:#28c840}
+.code .bar span{margin-left:8px}
+.code pre{margin:0;padding:16px 18px;white-space:pre-wrap;color:#c9d4e5;min-height:190px}
+.tk{color:#c792ea}.ty{color:#82aaff}.st{color:#c3e88d}.cm{color:#5d687a}.fn{color:#ffcb6b}
+.caret{display:inline-block;width:8px;height:16px;background:var(--blue);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.marquee{overflow:hidden;border:1px solid var(--line);border-radius:var(--r);padding:16px 0;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.track{display:flex;gap:36px;width:max-content;animation:scroll 32s linear infinite}
+.track span{font-size:15px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:36px}
+.track span::after{content:"✦";color:#3a4458}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+.sec{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin:72px 0 22px}
+.sec p{max-width:420px}
+.ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:22px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--blue)}
+.ico svg{width:22px;height:22px}
+.srv{min-height:220px;display:flex;flex-direction:column}
+.srv p{margin-top:auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.chips span{font-size:12.5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);color:#cdd6e4;background:rgba(255,255,255,.03)}
+
+.feature{padding:34px;background:linear-gradient(140deg,rgba(96,165,250,.10),rgba(167,139,250,.06) 45%,rgba(255,255,255,.02))}
+.dash{margin-top:26px;border:1px solid var(--line);border-radius:18px;background:rgba(6,8,13,.7);padding:16px;display:grid;grid-template-columns:150px 1fr;gap:14px}
+.side{display:flex;flex-direction:column;gap:6px}
+.side div{font-size:12.5px;color:var(--muted);padding:7px 10px;border-radius:9px}
+.side div.on{background:rgba(96,165,250,.14);color:#dbe8ff}
+.panel{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kpi small{display:block;font-size:11px;color:var(--dim)}
+.kpi b{font-size:15px}
+.bars{grid-column:span 3;display:flex;align-items:flex-end;gap:7px;height:110px;border:1px solid var(--line);border-radius:12px;padding:12px}
+.bars i{flex:1;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#60a5fa,#7c3aed);transform-origin:bottom;transform:scaleY(.15);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.on .bars i{transform:scaleY(1)}
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.mods div{font-size:13.5px;color:var(--muted);padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02)}
+.mods b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.steps li{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.steps li:first-child{border-top:0}
+.steps .n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue);padding-top:3px}
+.steps b{display:block}
+
+.tl{position:relative;list-style:none;margin:0;padding:0 0 0 26px}
+.tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--blue),var(--violet),transparent)}
+.tl li{position:relative;padding:0 0 26px}
+.tl li::before{content:"";position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--blue)}
+.tl li.now::before{background:var(--blue);box-shadow:0 0 0 5px rgba(96,165,250,.18)}
+.tl .y{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--dim)}
+.tl b{display:block;font-size:17px;margin:2px 0}
+
+.end{padding:56px 36px;text-align:center;background:radial-gradient(600px 260px at 50% 0%,rgba(96,165,250,.18),transparent 70%),var(--card)}
+.end h2{font-size:clamp(32px,5vw,60px);margin-bottom:14px}
+.end .btns{justify-content:center}
+footer{margin-top:28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+footer a{text-decoration:none}footer a:hover{color:var(--ink)}
+
+.sga{padding:34px;background:linear-gradient(140deg,rgba(124,58,237,.16),rgba(79,70,229,.08) 50%,rgba(255,255,255,.02))}
+.sga .k{color:#b9a7f5}
+.sgagrid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center}
+.sgamods{margin-top:0;grid-template-columns:repeat(2,1fr)}
+@media (max-width:1000px){.sgagrid{grid-template-columns:1fr}}
+@media (max-width:640px){.sga{padding:22px}.sgamods{grid-template-columns:1fr}}
+.browser{margin-top:26px;border:1px solid var(--line2);border-radius:16px;background:#0b0f18;overflow:hidden;box-shadow:0 30px 80px -30px rgba(37,99,235,.45)}
+.browser .top{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.03)}
+.browser .top i{width:10px;height:10px;border-radius:50%;background:#2a3140}
+.browser .top i:nth-child(1){background:#ff5f57}.browser .top i:nth-child(2){background:#febc2e}.browser .top i:nth-child(3){background:#28c840}
+.browser .url{flex:1;margin-left:10px;font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--dim);background:rgba(255,255,255,.04);border-radius:8px;padding:5px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slides{position:relative;aspect-ratio:1536/639;background:#0b0f18}
+.slides.fb{aspect-ratio:16/9.6}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;opacity:0;transform:scale(1.03);transition:opacity .8s ease,transform 6s ease}
+.slides img.act{opacity:1;transform:scale(1)}
+.slides .dash{position:absolute;inset:0;margin:0;border:0;border-radius:0}
+.cap{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.dots{display:flex;gap:6px}
+.dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:#2a3140;cursor:pointer;transition:width .3s,background .3s}
+.dots button.act{width:22px;background:var(--blue)}
+.tilt{transform-style:preserve-3d;will-change:transform}
+.tilt>*{transform:translateZ(0)}
+.photo img{transition:transform .3s ease-out}
+.fab{position:fixed;right:18px;bottom:18px;z-index:20;display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:14px;color:#03140c;background:var(--green);padding:13px 18px 13px 14px;border-radius:999px;box-shadow:0 12px 30px -8px rgba(52,211,153,.55);transform:translateY(120px);opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .45s}
+.fab.show{transform:none;opacity:1}
+.fab svg{width:22px;height:22px}
+.fab::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(52,211,153,.5);animation:ring 2.4s infinite}
+@keyframes ring{70%{box-shadow:0 0 0 14px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.scrollbar{position:fixed;left:0;top:0;height:3px;width:100%;z-index:30;background:var(--grad);transform-origin:0 50%;transform:scaleX(0)}
+@media (max-width:640px){.fab span{display:none}.fab{padding:14px}.slides.fb{aspect-ratio:4/3.4}}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.bars i{transform:none}}
+@media (max-width:1000px){.c3,.c4,.c5{grid-column:span 6}.c6,.c7,.c8{grid-column:span 12}.menu{display:none}.mods{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.c3,.c4,.c5,.c6,.c7,.c8,.c12{grid-column:auto}.hero{padding:28px 22px;min-height:0}.photo{min-height:380px}.card{padding:22px}.feature{padding:22px}.dash{grid-template-columns:1fr}.side{flex-direction:row;overflow:hidden}.side div{white-space:nowrap}.mods{grid-template-columns:1fr}.sec{flex-direction:column;align-items:flex-start;margin-top:56px}.end{padding:40px 22px}.lead{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="scrollbar" id="sbar" aria-hidden="true"></div>
+<a class="fab" id="fab" href="https://wa.me/5551981184283?text=Ol%C3%A1%20Douglas%2C%20vi%20seu%20site%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg><span>Vamos conversar</span></a>
+<div class="bgfx" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
+<div class="wrap">
+
+<header class="nav">
+  <a class="logo" href="#inicio"><b>DB</b>Douglas Beckmann</a>
+  <nav class="menu"><a href="#servicos">Serviços</a><a href="#imgestor">Projetos</a><a href="#trajetoria">Trajetória</a></nav>
+  <a class="cta" href="#contato">Contato</a>
+</header>
+
+<main id="inicio">
+<section class="grid">
+  <div class="card hero c8 rv">
+    <div>
+      <span class="badge"><span class="pulse"></span>Disponível para novos projetos</span>
+      <h1>Sistemas que fazem<br>a sua empresa <span class="gt">andar sozinha.</span></h1>
+      <p class="lead">Sou o Douglas, desenvolvedor .NET, sócio do IMGestor e desenvolvedor do SGA da Ano3 Viagens. Crio sistemas web sob medida, emissão de notas fiscais, boletos com Pix e integrações, do banco de dados até a tela que você usa.</p>
+    </div>
+    <div class="btns">
+      <a class="btn wa" href="https://wa.me/5551981184283?text=Ol%C3%A1%20Douglas%2C%20vi%20seu%20site%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>Falar no WhatsApp</a>
+      <a class="btn" href="#servicos">Ver o que eu faço →</a>
+    </div>
+  </div>
+
+  <div class="card photo c4 rv">
+    <span class="ph" aria-hidden="true">DB</span>
+    <img src="foto.jpg" alt="Foto de Douglas Beckmann" onerror="this.remove()">
+    <div class="tag"><div><b>Douglas Beckmann</b><span class="loc">Vale do Taquari/RS</span></div><span class="loc">Atendo todo o Brasil</span></div>
+  </div>
+
+  <div class="card stat c3 rv"><p class="k">// experiência</p><p class="num" data-n="20">0<span>+</span></p><p class="muted" style="margin-top:10px">anos em TI, do suporte e redes ao desenvolvimento</p></div>
+  <div class="card stat c3 rv"><p class="k">// imgestor</p><p class="num" data-n="30">0<span>+</span></p><p class="muted" style="margin-top:10px">módulos no ERP que eu desenvolvo como sócio</p></div>
+
+  <div class="card code c6 rv">
+    <div class="bar"><i></i><i></i><i></i><span>NotaFiscal.cs</span></div>
+    <pre id="typed" aria-label="Exemplo de código C#"></pre>
+  </div>
+
+  <div class="c12 marquee rv" aria-label="Tecnologias e integrações">
+    <div class="track">
+      <span>C#</span><span>ASP.NET</span><span>MySQL</span><span>SQL Server</span><span>NF-e · NFC-e · NFS-e</span><span>Boletos CNAB</span><span>Pix</span><span>WhatsApp</span><span>Mercado Livre</span><span>WooCommerce</span><span>APIs REST</span><span>IIS</span><span>PWA</span><span>IA</span>
+      <span>C#</span><span>ASP.NET</span><span>MySQL</span><span>SQL Server</span><span>NF-e · NFC-e · NFS-e</span><span>Boletos CNAB</span><span>Pix</span><span>WhatsApp</span><span>Mercado Livre</span><span>WooCommerce</span><span>APIs REST</span><span>IIS</span><span>PWA</span><span>IA</span>
+    </div>
+  </div>
+</section>
+
+<div class="sec" id="servicos">
+  <h2>O que eu faço pela<br><span class="gt">sua empresa</span></h2>
+  <p class="muted">Tecnologia sob medida para quem quer parar de depender de planilhas e de sistemas que não conversam entre si.</p>
+</div>
+<section class="grid">
+  <div class="card srv c6 rv">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div>
+    <h3>Sistemas web sob medida</h3>
+    <p class="muted">Do cadastro ao relatório: um sistema feito para o jeito que a sua empresa trabalha, acessível de qualquer lugar, no computador ou no celular.</p>
+  </div>
+  <div class="card srv c3 rv">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></div>
+    <h3>Notas fiscais</h3>
+    <p class="muted">NF-e, NFC-e e NFS-e integradas, já pensando na Reforma Tributária.</p>
+  </div>
+  <div class="card srv c3 rv">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div>
+    <h3>Boletos e Pix</h3>
+    <p class="muted">Boletos de vários bancos, remessa e retorno, Pix e conciliação.</p>
+  </div>
+  <div class="card srv c5 rv">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.3 11 15.7 7M8.3 13l7.4 4"/></svg></div>
+    <h3>Integrações</h3>
+    <p class="muted">Conecto o seu sistema às ferramentas que você já usa.</p>
+    <div class="chips"><span>WhatsApp</span><span>Instagram</span><span>Mercado Livre</span><span>WooCommerce</span><span>Correios</span><span>Melhor Envio</span><span>TEF</span><span>Bancos</span><span>IA</span></div>
+  </div>
+  <div class="card srv c4 rv">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></div>
+    <h3>Banco de dados e legados</h3>
+    <p class="muted">Consultas mais rápidas em MySQL e SQL Server, e manutenção de sistemas .NET que já existem.</p>
+  </div>
+  <div class="card srv c3 rv">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+    <h3>Servidores e redes</h3>
+    <p class="muted">Windows Server, IIS, redes e suporte de TI.</p>
+  </div>
+</section>
+
+<div class="sec" id="imgestor">
+  <h2>Projetos em <span class="gt">destaque</span></h2>
+  <p class="muted">Dois sistemas de gestão que eu desenvolvo e mantenho em produção, usados todos os dias por empresas reais.</p>
+</div>
+<section class="grid">
+  <div class="card feature c8 rv" id="feat">
+    <p class="k">// ERP na nuvem</p>
+    <h2>IMGestor</h2>
+    <p class="muted" style="font-size:17px;margin-top:10px;max-width:620px">Gestão completa com mais de 30 módulos, usada por empresas de comércio, restaurantes, serviços, oficinas, clínicas e gestão ambiental.</p>
+    <div class="browser">
+      <div class="top"><i></i><i></i><i></i><span class="url" id="url">imgestor.com.br</span></div>
+      <div class="slides fb" id="slides">
+        <div class="dash" id="dashFallback" aria-hidden="true">
+          <div class="side"><div class="on">Início</div><div>Vendas</div><div>Financeiro</div><div>Notas fiscais</div><div>WhatsApp</div></div>
+          <div class="panel">
+            <div class="kpi"><small>Notas emitidas</small><b>NF-e · NFS-e</b></div>
+            <div class="kpi"><small>Recebimentos</small><b>Boleto + Pix</b></div>
+            <div class="kpi"><small>Atendimento</small><b>Robô com IA</b></div>
+            <div class="bars"><i style="height:40%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:78%"></i><i style="height:66%"></i><i style="height:90%"></i><i style="height:72%"></i><i style="height:100%"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><span id="capTxt">Painel do IMGestor</span><div class="dots" id="dots"></div></div>
+    </div>
+    <div class="mods">
+      <div><b>Fiscal</b>NF-e, NFC-e, NFS-e e entrada de notas</div>
+      <div><b>Financeiro</b>DRE, conciliação, boletos e Pix</div>
+      <div><b>Vendas</b>PDV com TEF, comandas e cardápio online</div>
+      <div><b>Atendimento</b>WhatsApp, robô com IA e funil</div>
+      <div><b>Operação</b>Agenda, frotas, chamados e contratos</div>
+      <div><b>Apps</b>PWA, inclusive sem internet</div>
+    </div>
+    <div class="btns"><a class="btn" href="https://imgestor.com.br" target="_blank" rel="noopener">Conhecer o IMGestor ↗</a></div>
+  </div>
+  <div class="card c4 rv">
+    <p class="k">// como trabalho</p>
+    <ul class="steps">
+      <li><span class="n">01</span><span><b>Conversa</b><span class="muted">Entendo a rotina e o problema real.</span></span></li>
+      <li><span class="n">02</span><span><b>Proposta</b><span class="muted">Escopo, prazo e valor claros.</span></span></li>
+      <li><span class="n">03</span><span><b>Entregas por etapa</b><span class="muted">Você testa e aprova cada parte.</span></span></li>
+      <li><span class="n">04</span><span><b>Suporte</b><span class="muted">Sigo por perto depois do lançamento.</span></span></li>
+    </ul>
+  </div>
+
+  <div class="card sga c12 rv" id="sga">
+    <div class="sgagrid">
+      <div>
+        <p class="k">// sistema sob medida · desde 2022</p>
+        <h2>SGA <span class="muted" style="font-weight:600">· Sistema de Gestão Ano3</span></h2>
+        <p class="muted" style="font-size:17px;margin-top:10px;max-width:560px">Sistema feito sob medida para a Ano3 Viagens, em Lajeado/RS: vendas, financeiro e atendimento da agência em um só lugar. Desenvolvo e mantenho o SGA, da primeira tela ao servidor.</p>
+        <div class="chips" style="margin-top:20px"><span>Vendas de viagens</span><span>Milheiros</span><span>Vouchers</span><span>Pós-venda</span><span>Funil de vendas</span><span>Cancelamentos</span><span>Incentivos</span><span>Campanhas</span><span>Aniversários</span></div>
+        <div class="btns"><a class="btn" href="https://sga.ano3.com.br/" target="_blank" rel="noopener">Ver o SGA ↗</a><a class="btn" href="https://ano3.com.br" target="_blank" rel="noopener">Ano3 Viagens ↗</a></div>
+      </div>
+      <div class="mods sgamods">
+        <div><b>Vendas</b>Vendas de pacotes, vouchers e milheiros</div>
+        <div><b>Financeiro</b>Contas, faturamento, extratos e NFS-e</div>
+        <div><b>Relacionamento</b>Funil, pós-venda, campanhas e aniversários</div>
+        <div><b>Pessoas</b>RH e portal do colaborador</div>
+        <div><b>Rotina</b>Tarefas, agenda e feedbacks</div>
+        <div><b>Integrações</b>Importação do Conta Azul e webhooks</div>
+      </div>
+    </div>
+    <div class="browser" id="sgaBrowser" hidden>
+      <div class="top"><i></i><i></i><i></i><span class="url" id="sgaUrl">sga.ano3.com.br</span></div>
+      <div class="slides" id="sgaSlides"></div>
+      <div class="cap"><span id="sgaCap">Dashboard do SGA</span><div class="dots" id="sgaDots"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="sec" id="trajetoria">
+  <h2>Trajetória</h2>
+  <p class="muted">Comecei no suporte em 2005 e fui da rede ao código. Por isso entendo o sistema inteiro.</p>
+</div>
+<section class="grid">
+  <div class="card c8 rv">
+    <ul class="tl">
+      <li class="now"><span class="y">2025 — hoje</span><b>IMGestor · sócio e desenvolvedor .NET</b><span class="muted">ERP na nuvem, Santa Clara do Sul/RS</span></li>
+      <li class="now"><span class="y">2022 — hoje</span><b>Ano3 Viagens · desenvolvedor .NET e suporte de TI</b><span class="muted">Desenvolvo o SGA, sistema de gestão da agência, e cuido do ambiente de tecnologia</span></li>
+      <li><span class="y">2023 — 2026</span><b>Time-Lapse PRO · desenvolvedor de software</b><span class="muted">Desenvolvimento web, APIs e performance SQL</span></li>
+      <li><span class="y">2011 — 2023</span><b>Olicenter Informática · técnico e vendedor</b><span class="muted">Redes, servidores e suporte a sistemas</span></li>
+      <li style="padding-bottom:0"><span class="y">2005 — 2011</span><b>Bom Gosto, Revolution e Assistec · técnico</b><span class="muted">Onde tudo começou: manutenção, redes e suporte</span></li>
+    </ul>
+  </div>
+  <div class="card c4 rv">
+    <p class="k">// formação</p>
+    <h3>Bacharel em Ciência da Computação</h3>
+    <p class="muted">ULBRA · 2019</p>
+    <p class="k" style="margin-top:28px">// cursos</p>
+    <p class="muted">Windows Server (MS6420 e MS6421)</p>
+    <p class="muted">Desenvolvedor Web PHP e MySQL, Univates</p>
+  </div>
+</section>
+
+<section id="contato" style="margin-top:72px">
+  <div class="card end rv">
+    <p class="k">// próximo passo</p>
+    <h2>Vamos tirar a sua ideia<br><span class="gt">do papel?</span></h2>
+    <p class="muted" style="font-size:17px">Me conta o que você precisa. Respondo com ideias, prazo e valor, sem compromisso.</p>
+    <div class="btns">
+      <a class="btn wa" href="https://wa.me/5551981184283" target="_blank" rel="noopener">WhatsApp (51) 98118-4283</a>
+      <a class="btn" href="mailto:douglas.toto@gmail.com">douglas.toto@gmail.com</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span>© <span id="ano">2026</span> Douglas Beckmann · Vale do Taquari/RS</span>
+  <span><a href="https://www.linkedin.com/in/douglas-beckmann-3307b3372" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/douglastoto87" target="_blank" rel="noopener">GitHub</a> · <a href="https://imgestor.com.br" target="_blank" rel="noopener">IMGestor</a></span>
+</footer>
+</div>
+
+<script>
+(function(){
+  document.getElementById('ano').textContent=new Date().getFullYear();
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.card').forEach(function(c){
+    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--x',(e.clientX-r.left)+'px');c.style.setProperty('--y',(e.clientY-r.top)+'px')});
+  });
+
+  function count(el){var n=+el.dataset.n,t0=null,suf=el.querySelector('span').outerHTML;
+    if(reduce){el.innerHTML=n+suf;return}
+    function step(t){t0=t0||t;var p=Math.min((t-t0)/1200,1);el.innerHTML=Math.round(n*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(step)}
+    requestAnimationFrame(step)}
+
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var el=e.target;el.classList.add('on');el.querySelectorAll('[data-n]').forEach(count);io.unobserve(el)})},{threshold:.15}):null;
+  document.querySelectorAll('.rv').forEach(function(el){if(io)io.observe(el);else{el.classList.add('on');el.querySelectorAll('[data-n]').forEach(count)}});
+
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  if(fine&&!reduce){
+    document.querySelectorAll('.card:not(.end)').forEach(function(c){
+      c.classList.add('tilt');
+      c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5,k=r.width>600?3:6;
+        c.style.transform='perspective(1000px) rotateX('+(-py*k)+'deg) rotateY('+(px*k)+'deg) translateY(-2px)'});
+      c.addEventListener('pointerleave',function(){c.style.transform=''});
+    });
+    var ph=document.querySelector('.photo');
+    if(ph)ph.addEventListener('pointermove',function(e){var r=ph.getBoundingClientRect(),img=ph.querySelector('img');if(!img)return;
+      img.style.transform='scale(1.08) translate('+(((e.clientX-r.left)/r.width-.5)*-14)+'px,'+(((e.clientY-r.top)/r.height-.5)*-14)+'px)'});
+    if(ph)ph.addEventListener('pointerleave',function(){var img=ph.querySelector('img');if(img)img.style.transform=''});
+  }
+
+  var fab=document.getElementById('fab'),sbar=document.getElementById('sbar'),hero=document.querySelector('.hero');
+  function onScroll(){var h=document.documentElement,p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);sbar.style.transform='scaleX('+p+')';
+    var b=hero.getBoundingClientRect().bottom;fab.classList.toggle('show',b<0&&document.getElementById('contato').getBoundingClientRect().top>innerHeight-60)}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  function carrossel(o){
+    var box=document.getElementById(o.box),dotsEl=document.getElementById(o.dots),capT=document.getElementById(o.cap),urlT=document.getElementById(o.url);
+    var ok=[],cur=0,timer=null,pend=o.shots.length;
+    o.shots.forEach(function(s,i){var im=new Image();im.alt=s[1]+' (dados borrados)';im.decoding='async';
+      im.onload=function(){ok[i]={img:im,cap:s[1],url:s[2]};done()};im.onerror=done;im.src=s[0]});
+    function done(){if(--pend)return;ok=ok.filter(Boolean);if(!ok.length)return;
+      if(o.fallback){var f=document.getElementById(o.fallback);if(f)f.remove()}
+      box.classList.remove('fb');if(o.show)document.getElementById(o.show).hidden=false;
+      ok.forEach(function(x,i){box.appendChild(x.img);if(ok.length>1){var b=document.createElement('button');b.setAttribute('aria-label','Ver '+x.cap);b.onclick=function(){go(i);restart()};dotsEl.appendChild(b);x.dot=b}});
+      go(0);restart();
+      var x0=null;box.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+      box.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(cur+(dx<0?1:-1));restart()}x0=null});
+    }
+    function go(i){cur=(i+ok.length)%ok.length;ok.forEach(function(x,j){x.img.classList.toggle('act',j===cur);if(x.dot)x.dot.classList.toggle('act',j===cur)});capT.textContent=ok[cur].cap;urlT.textContent=ok[cur].url}
+    function restart(){clearInterval(timer);if(ok.length>1&&!reduce)timer=setInterval(function(){go(cur+1)},o.ms||4500)}
+  }
+  carrossel({box:'slides',dots:'dots',cap:'capTxt',url:'url',fallback:'dashFallback',shots:[
+    ['prints/01.jpg','Painel inicial com o resumo do dia','imgestor.com.br/home'],
+    ['prints/02.jpg','Financeiro: contas, fluxo, conciliação, DRE e boletos','imgestor.com.br/financeiro'],
+    ['prints/03.jpg','Loja: vendas, notas, comandas, estoque e pedidos online','imgestor.com.br/loja'],
+    ['prints/04.jpg','Relatório de vendas por horário','imgestor.com.br/relatorios']
+  ]});
+  carrossel({box:'sgaSlides',dots:'sgaDots',cap:'sgaCap',url:'sgaUrl',show:'sgaBrowser',ms:5200,shots:[
+    ['prints/sga-01.jpg','Dashboard: vendas, tarefas, financeiro e gestão','sga.ano3.com.br/home'],
+    ['prints/sga-02.jpg','Metas, vendas por dia e lucro por origem','sga.ano3.com.br/home']
+  ]});
+
+  var code=[
+    ['cm','// Emite a NF-e e manda o PDF pro cliente no WhatsApp\n'],
+    ['tk','public async '],['ty','Task'],['','<'],['ty','Nota'],['','> '],['fn','EmitirAsync'],['','(Venda venda)\n{\n    '],
+    ['tk','var '],['','nota = '],['tk','await '],['','_sefaz.'],['fn','AutorizarAsync'],['','(venda);\n    '],
+    ['tk','await '],['','_whatsapp.'],['fn','EnviarAsync'],['','(venda.Cliente, nota.Pdf);\n    '],
+    ['tk','await '],['','_financeiro.'],['fn','GerarPixAsync'],['','(venda);\n    '],
+    ['tk','return '],['','nota; '],['cm','// '],['st','"pronto ✓"'],['','\n}']
+  ];
+  var pre=document.getElementById('typed');
+  var html='';code.forEach(function(p){html+=p[0]?'<span class="'+p[0]+'">'+p[1].replace(/</g,'&lt;')+'</span>':p[1].replace(/</g,'&lt;')});
+  if(reduce){pre.innerHTML=html;return}
+  var flat=[];code.forEach(function(p){for(var i=0;i<p[1].length;i++)flat.push([p[0],p[1][i]])});
+  var i=0,started=false;
+  function type(){var out='',cur=null,buf='';
+    for(var j=0;j<i;j++){var c=flat[j];if(c[0]!==cur){if(buf)out+=cur?'<span class="'+cur+'">'+buf+'</span>':buf;cur=c[0];buf=''}buf+=c[1]==='<'?'&lt;':c[1]}
+    if(buf)out+=cur?'<span class="'+cur+'">'+buf+'</span>':buf;
+    pre.innerHTML=out+'<span class="caret"></span>';
+    if(i<flat.length){i++;setTimeout(type,flat[i-1][1]==='\n'?120:18)}
+  }
+  var o2='IntersectionObserver' in window?new IntersectionObserver(function(es){if(es[0].isIntersecting&&!started){started=true;type();o2.disconnect()}}):null;
+  if(o2)o2.observe(pre);else type();
+})();
+</script>
+</body>
+</html>
